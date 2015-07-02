@@ -5,7 +5,7 @@ from django.template import TemplateDoesNotExist
 from dbtemplates.models import Template
 from dbtemplates.utils.cache import (cache, get_cache_key,
                                      set_and_return, get_cache_notfound_key)
-from django.template.loader import BaseLoader
+from django.template.loader.base import Loader as BaseLoader
 
 
 class Loader(BaseLoader):
@@ -66,7 +66,7 @@ class Loader(BaseLoader):
         except (Template.MultipleObjectsReturned, Template.DoesNotExist):
             try:
                 return self.load_and_store_template(template_name, cache_key,
-                                                    site, sites__in=[])
+                                                    site, sites__isnull=True)
             except (Template.MultipleObjectsReturned, Template.DoesNotExist):
                 pass
 
