@@ -1,4 +1,4 @@
-from django.core.cache import get_cache
+from django.core.cache import caches
 
 from django.contrib.sites.models import Site
 from django.template.defaultfilters import slugify
@@ -7,7 +7,7 @@ from dbtemplates.conf import settings
 
 
 def get_cache_backend():
-    return get_cache(settings.DBTEMPLATES_CACHE_BACKEND)
+    return caches[settings.DBTEMPLATES_CACHE_BACKEND]
 
 cache = get_cache_backend()
 
